@@ -162,6 +162,10 @@ class Day:
         """Returns the last day that was a Monday or the day itself if it is a Monday"""
         return self.plus_days(-self.as_datetime().weekday())
 
+    def first_day_of_month(self) -> Day:
+        """Returns the first day of the month"""
+        return Day(self.y, self.m, 1)
+
     def last_day_of_month(self) -> Day:
         """Returns the last day of the month"""
         return Day(self.y, self.m, calendar.monthrange(self.y, self.m)[1])
