@@ -95,3 +95,50 @@ class Period:
         :return: A new Period object representing the overlap, or None if there's no overlap
         """
         return self & other
+
+    def is_empty(self) -> bool:
+        """Check if the period has no duration."""
+        return self.fromday == self.untilday
+
+    def duration(self) -> int:
+        """Return the duration of the period in days."""
+        if not self.untilday:
+            return 0
+        return (self.untilday - self.fromday).days
+
+    def union(self, other: 'Period') -> 'Period':
+        """Combine this period with another, covering the entire range."""
+        start = min(self.fromday, other.fromday)
+        end = max(self.untilday, other.untilday) if self.untilday and other.untilday else None
+        return Period(start, end)
+
+    def intersects(self, other: 'Period') -> bool:
+        """Check if this period overlaps with another period."""
+        if not self.untilday or not other.untilday:
+            return self.fromday <= other.fromday or other.fromday <= self.fromday
+        return self.fromday < other.untilday and other.fromday < self.untilday
+
+    def shift(self, days: int) -> 'Period':
+        """Move the period forward or backward by a given number of days."""
+        new_start = self.fromday.plus_days(days)
+        new_end = self.untilday.plus_days(days) if self.untilday else None
+        return Period(new_start, new_end)
+
+    def expand(self, days: int) -> 'Period':
+        """Expand the period by a given number of days on both ends."""
+        new_start = self.fromday.plus_days(-days)
+        new_end = self.untilday.plus_days(days) if self.untilday else None
+        return Period(new_start, new_end)
+
+    def split(self, duration: int) -> list['Period']:
+        """Split the period into smaller periods of a given duration in days."""
+        if not self.untilday:
+            raise ValueError("Cannot split an open-ended period")
+        
+        result = []
+        current = self.fromday
+        while current < self.untilday:
+            end = min(current.plus_days(duration), self.untilday)
+            result.append(Period(current, end))
+            current = end
+        return result
