@@ -61,9 +61,9 @@ class Period:
             return self.fromday <= other.fromday < self.untilday and self.fromday <= other.untilday < self.untilday
         raise TypeError(f"Invalid type passed to Period.__contains__: {type(other)}")
 
-    def __len__(self) -> float:
+    def __len__(self) -> int:
         if self.untilday is None:
-            return float('inf')
+            return 2**31 - 1  # Maximum value for a 32-bit signed integer
         return (self.untilday - self.fromday).days
 
     def __eq__(self, other) -> bool:
