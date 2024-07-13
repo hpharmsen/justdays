@@ -99,7 +99,7 @@ period = Period.from_month(2022, 8)  # Period ranging from the 1st of August unt
 ~~~~python
 fromday = period.fromday
 untilday = period.untilday
-length = len(period)
+length = len(period)  # Returns maximum integer value for open-ended periods
 ~~~~
 
 ### Iterating over a Period
@@ -112,4 +112,22 @@ for day in period:
 ~~~~python
 if day in period:
     print('yes!')
+~~~~
+
+### Operations with Periods
+~~~~python
+overlap = period1 & period2  # Calculate overlap between two periods
+union = period1 | period2  # Calculate union of two periods
+if period1.intersects(period2):
+    print("Periods overlap")
+~~~~
+
+### Additional Period methods
+~~~~python
+if period.is_empty():
+    print("Period has no duration")
+if period:  # Truthy operator, returns True if period is not empty
+    print("Period is not empty")
+shifted_period = period.shift(7)  # Move period 7 days forward
+split_periods = period.split(30)  # Split period into 30-day chunks
 ~~~~
