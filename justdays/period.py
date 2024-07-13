@@ -104,12 +104,6 @@ class Period:
         """Return True if the period is not empty, False otherwise."""
         return not self.is_empty()
 
-    def duration(self) -> int:
-        """Return the duration of the period in days."""
-        if not self.untilday:
-            return 0
-        return (self.untilday - self.fromday).days
-
     def __or__(self, other: 'Period') -> 'Period':
         """
         Perform a union of this period with another period using the | operator.
