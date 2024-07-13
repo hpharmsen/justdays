@@ -67,9 +67,9 @@ class Period:
     def __eq__(self, other) -> bool:
         return self.fromday == other.fromday and self.untilday == other.untilday
 
-    def overlap(self, other: 'Period') -> 'Period':
+    def __and__(self, other: 'Period') -> 'Period':
         """
-        Calculate the overlap between this period and another period.
+        Calculate the overlap between this period and another period using the & operator.
         
         :param other: Another Period object to calculate overlap with
         :return: A new Period object representing the overlap, or None if there's no overlap
@@ -86,3 +86,12 @@ class Period:
         overlap_end = min(self.untilday, other.untilday) if self.untilday and other.untilday else None
 
         return Period(overlap_start, overlap_end)
+
+    def overlap(self, other: 'Period') -> 'Period':
+        """
+        Calculate the overlap between this period and another period.
+        
+        :param other: Another Period object to calculate overlap with
+        :return: A new Period object representing the overlap, or None if there's no overlap
+        """
+        return self & other
