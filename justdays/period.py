@@ -106,11 +106,20 @@ class Period:
             return 0
         return (self.untilday - self.fromday).days
 
-    def union(self, other: 'Period') -> 'Period':
-        """Combine this period with another, covering the entire range."""
+    def __or__(self, other: 'Period') -> 'Period':
+        """
+        Perform a union of this period with another period using the | operator.
+        
+        :param other: Another Period object to union with
+        :return: A new Period object representing the union
+        """
         start = min(self.fromday, other.fromday)
         end = max(self.untilday, other.untilday) if self.untilday and other.untilday else None
         return Period(start, end)
+
+    def union(self, other: 'Period') -> 'Period':
+        """Combine this period with another, covering the entire range."""
+        return self | other
 
     def intersects(self, other: 'Period') -> bool:
         """Check if this period overlaps with another period."""
