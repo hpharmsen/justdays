@@ -100,6 +100,10 @@ class Period:
         """Check if the period has no duration."""
         return self.fromday == self.untilday
 
+    def __bool__(self) -> bool:
+        """Return True if the period is not empty, False otherwise."""
+        return not self.is_empty()
+
     def duration(self) -> int:
         """Return the duration of the period in days."""
         if not self.untilday:
