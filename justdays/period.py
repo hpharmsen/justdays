@@ -61,8 +61,10 @@ class Period:
             return self.fromday <= other.fromday < self.untilday and self.fromday <= other.untilday < self.untilday
         raise TypeError(f"Invalid type passed to Period.__contains__: {type(other)}")
 
-    def __len__(self) -> int:
-        return self.untilday - self.fromday
+    def __len__(self) -> float:
+        if self.untilday is None:
+            return float('inf')
+        return (self.untilday - self.fromday).days
 
     def __eq__(self, other) -> bool:
         return self.fromday == other.fromday and self.untilday == other.untilday
