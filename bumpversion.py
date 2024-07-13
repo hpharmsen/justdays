@@ -32,7 +32,9 @@ def bump(file, tag, what='minor', new_version=None):
 
 
 if __name__ == "__main__":
-    what = sys.argv[1]
+    what = sys.argv[1] if len(sys.argv) >= 2 else 'patch'
     version = bump('pyproject.toml', "version = ", what=what)
-    bump("README.md", "Current version: ", new_version=version)
-    print('Updated version to', version)
+    if '-v' in sys.argv:
+        print(version)
+    else:
+        print('Updated version to', version)
