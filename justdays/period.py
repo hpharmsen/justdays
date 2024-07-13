@@ -133,12 +133,6 @@ class Period:
         new_end = self.untilday.plus_days(days) if self.untilday else None
         return Period(new_start, new_end)
 
-    def expand(self, days: int) -> 'Period':
-        """Expand the period by a given number of days on both ends."""
-        new_start = self.fromday.plus_days(-days)
-        new_end = self.untilday.plus_days(days) if self.untilday else None
-        return Period(new_start, new_end)
-
     def split(self, duration: int) -> list['Period']:
         """Split the period into smaller periods of a given duration in days."""
         if not self.untilday:
