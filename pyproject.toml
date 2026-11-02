@@ -17,9 +17,9 @@ keywords = ["days", "adding days", "difference between days", "range of days", "
 dependencies = [
     "python-dateutil",
 ]
-requires-python = ">=3.7"
+requires-python = ">=3.11"
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = ["black", "pytest", "build", "twine", "nox"]
 
 [project.urls]

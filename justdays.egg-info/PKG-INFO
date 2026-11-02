@@ -1,4 +1,4 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.4
 Name: justdays
 Version: 1.9.3
 Summary: Makes working with days super easy
@@ -32,16 +32,11 @@ Project-URL: Homepage, https://github.com/hpharmsen/justdays
 Keywords: days,adding days,difference between days,range of days,last Monday
 Classifier: Programming Language :: Python
 Classifier: Programming Language :: Python :: 3
-Requires-Python: >=3.7
+Requires-Python: >=3.11
 Description-Content-Type: text/markdown
 License-File: LICENSE
 Requires-Dist: python-dateutil
-Provides-Extra: dev
-Requires-Dist: black; extra == "dev"
-Requires-Dist: pytest; extra == "dev"
-Requires-Dist: build; extra == "dev"
-Requires-Dist: twine; extra == "dev"
-Requires-Dist: nox; extra == "dev"
+Dynamic: license-file
 
 # Justdays
 
